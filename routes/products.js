@@ -2,14 +2,15 @@ const express = require('express')
 const router = express.Router()
 const Xray = require('x-ray')
 const x = Xray()
+const axios = require('axios')
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
   res.send('respond with a resource')
 })
 
-router.get('/placas', (req, res) => {
-  const stream = x('http://www.tricubo.com.ar/categoria-producto/placas-de-video/', '.hover', [{
+router.post('/tricubo', (req, res) => {
+  const stream = x(req.body.url, '.hover', [{
     title: 'h3',
     img: 'img@src',
     link: '.product-loop-title@href',
@@ -20,17 +21,20 @@ router.get('/placas', (req, res) => {
   }])
     .paginate('.next@href')
     .stream()
-  stream.pipe(res)
+  return stream.pipe(res)
 })
 
-router.get('/make', (req, res) => {
-  console.log(asyncFetch('http://localhost:3000/productos/placas'))
+router.post('/make', (req, res) => {
+  axios
+    .post(req.body.website, {
+      url: req.body.url
+    })
+    .then(response => {
+      res.send(response.data)
+    })
+    .catch(error => {
+      res.send(error)
+    })
 })
-
-async function asyncFetch (url) {
-  let response = await fetch(url)
-  if (response.ok) return await response.json()
-  throw new Error(response.status)
-}
 
 module.exports = router
