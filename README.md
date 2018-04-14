@@ -1,0 +1,2 @@
+# gamingstore-scrap
+GameStore scrapping
