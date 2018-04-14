@@ -36,6 +36,19 @@ router.post('/compragamer', (req, res) => {
   return stream.pipe(res)
 })
 
+router.post('/xellers', (req, res) => {
+  // param nro_max=1000 en get para obtener todos los de la lista sin paginar
+  const stream = x(req.body.url, 'li', [{
+    title: 'h3',
+    img: 'img@src',
+    description: 'li .des',
+    priceRegular: '.reg_p font',
+    priceDescont: '.web_p font'
+  }])
+    .stream()
+  return stream.pipe(res)
+})
+
 router.post('/make', (req, res) => {
   axios
     .post(req.body.website, {
