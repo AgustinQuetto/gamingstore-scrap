@@ -25,14 +25,13 @@ router.post('/tricubo', (req, res) => {
 })
 
 router.post('/compragamer', (req, res) => {
-  // param nro_max=1000 para obtener todos los de la lista sin paginar
+  // param nro_max=1000 en get para obtener todos los de la lista sin paginar
   const stream = x(req.body.url, 'div .products__item', [{
     title: 'li h4 a',
     img: 'li img@src',
     link: 'li h4 a@href',
     price: 'li span'
   }])
-    .paginate('li .li-last a@href')
     .stream()
   return stream.pipe(res)
 })
