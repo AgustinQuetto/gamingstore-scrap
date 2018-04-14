@@ -10,6 +10,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/tricubo', (req, res) => {
+  // ej http://www.tricubo.com.ar/categoria-producto/placas-de-video/
   const stream = x(req.body.url, '.hover', [{
     title: 'h3',
     img: 'img@src',
@@ -26,6 +27,7 @@ router.post('/tricubo', (req, res) => {
 
 router.post('/compragamer', (req, res) => {
   // param nro_max=1000 en get para obtener todos los de la lista sin paginar
+  // https://compragamer.com/index.php?seccion=3&cate=30&destacados=1&nro_max=1000
   const stream = x(req.body.url, 'div .products__item', [{
     title: 'li h4 a',
     img: 'li img@src',
@@ -37,7 +39,7 @@ router.post('/compragamer', (req, res) => {
 })
 
 router.post('/xellers', (req, res) => {
-  // param nro_max=1000 en get para obtener todos los de la lista sin paginar
+  // ej https://store.xellers.com.ar/productos-rubro/placas-de-video/
   const stream = x(req.body.url, 'li', [{
     title: 'h3',
     img: 'img@src',
