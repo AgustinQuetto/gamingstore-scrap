@@ -24,6 +24,17 @@ router.post('/tricubo', (req, res) => {
   return stream.pipe(res)
 })
 
+router.post('/compragamer', (req, res) => {
+  const stream = x(req.body.url, 'div .products__item', [{
+    title: 'h4 a',
+    img: 'img@src',
+    link: 'h4 a@href',
+    price: 'span'
+  }])
+    .stream()
+  return stream.pipe(res)
+})
+
 router.post('/make', (req, res) => {
   axios
     .post(req.body.website, {
